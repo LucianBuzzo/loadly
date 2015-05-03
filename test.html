@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>loadlyJS</title>
+  <style>
+    body {
+      font-family: arial, sans-serif;
+      padding: 0 15px;
+    }
+  </style>
+</head>
+<body>
+  <h1>loadlyJS</h1>
+  <button onclick="loadIt()" id="button">Start</button>
+  <button onclick="progress()" id="progress">Progress</button>
+
+  <script src="loadly.js"></script>
+  <script>
+    var loading = false;
+    function loadIt() {
+      if(!loading) {
+        loadly.spinner('Loading...');
+        button.innerText = 'Stop';
+      } else {
+        loadly.spinner('Done!', true);
+        button.innerText = 'Start';
+      }
+      loading = !loading;
+    }
+    function progress() {
+      var interval, total = 76, complete = 0;
+      loadly.progress(complete, total);
+      setInterval( function() {
+        if ( complete > total ) {
+          return clearInterval(interval);
+        }
+        loadly.progress(complete++, total);
+      }, 100);
+    }
+  </script>
+</body>
+</html>
