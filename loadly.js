@@ -4,7 +4,9 @@
     spinner: function (prefix, end) {
       clearInterval(spinnerInterval);
       var spinner = ['-','\\','|','/'], i = 0, l = spinner.length;
-      prefix = '# ' + prefix + ' ' || '# ';
+      prefix = (typeof prefix === 'string' && prefix.length > 0)
+        ? '# ' + prefix + ' '
+        : '# ';
       if (end) {
         window.location.hash = prefix;
         return;
