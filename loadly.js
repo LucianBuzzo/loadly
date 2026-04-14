@@ -18,9 +18,16 @@
     },
     progress: function (complete, total, end) {
       clearInterval(spinnerInterval);
-      var barWidth = 20, width = Math.floor(barWidth*(complete/total));
+      var barWidth = 20;
+      var safeTotal = (typeof total === 'number' && total > 0) ? total : 1;
+      var safeComplete = (typeof complete === 'number') ? complete : 0;
+      var ratio = safeComplete / safeTotal;
+      var width = Math.floor(barWidth * ratio);
+
+      if (width < 0) width = 0;
+      if (width > barWidth) width = barWidth;
+
       var bar = new Array(width + 1).join('█') + new Array(barWidth + 1 - width).join('▒');
-      //window.location.hash = '# ' + bar + ' ' + complete + '/' + total;
       window.location.hash = '# ' + bar + ' ' + complete + '/' + total;
       if ( end || complete === total ) {
         window.location.hash = '# Complete!';
