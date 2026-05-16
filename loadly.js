@@ -28,7 +28,7 @@
       if (width > barWidth) width = barWidth;
 
       var bar = new Array(width + 1).join('█') + new Array(barWidth + 1 - width).join('▒');
-      window.location.hash = '# ' + bar + ' ' + complete + '/' + total;
+      window.location.hash = '# ' + bar + ' ' + safeComplete + '/' + safeTotal;
       if ( end || complete === total ) {
         window.location.hash = '# Complete!';
       }
